@@ -421,10 +421,10 @@ func BlockedAddresses() map[string]bool {
 	return result
 }
 
-// InitOsmosisAppForTestnet is broken down into two sections:
+// InitAppForTestnet is broken down into two sections:
 // Required Changes: Changes that, if not made, will cause the testnet to halt or panic
 // Optional Changes: Changes to customize the testnet to one's liking (lower vote times, fund accounts, etc)
-func InitOsmosisAppForTestnet(app *App, newValAddr bytes.HexBytes, newValPubKey crypto.PubKey, newOperatorAddress, upgradeToTrigger string) *App {
+func InitAppForTestnet(app *App, newValAddr bytes.HexBytes, newValPubKey crypto.PubKey, newOperatorAddress, upgradeToTrigger string) *App {
 	//
 	// Required Changes:
 	//
@@ -566,15 +566,15 @@ func InitOsmosisAppForTestnet(app *App, newValAddr bytes.HexBytes, newValPubKey 
 	// mnemonic:"improve fun aim fringe machine shed repair olympic copper buddy road used trial liquid energy diamond orange lock time exact away change icon spike"
 	// address:"cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"
 
-	localOsmosisAccounts := []sdk.AccAddress{
+	localAccounts := []sdk.AccAddress{
 		sdk.MustAccAddressFromBech32("cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq"),
 		sdk.MustAccAddressFromBech32("cosmos1w7f3xx7e75p4l7qdym5msqem9rd4dyc4752spg"),
 		sdk.MustAccAddressFromBech32("cosmos1g9v3zjt6rfkwm4s8sw9wu4jgz9me8pn27f8nyc"),
 		sdk.MustAccAddressFromBech32("cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"),
 	}
 
-	// Fund localosmosis accounts
-	for _, account := range localOsmosisAccounts {
+	// Fund local accounts
+	for _, account := range localAccounts {
 		err := app.BankKeeper.MintCoins(ctx, minttypes.ModuleName, defaultCoins)
 		if err != nil {
 			tmos.Exit(err.Error())

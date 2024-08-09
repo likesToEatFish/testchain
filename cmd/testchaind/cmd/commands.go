@@ -263,11 +263,11 @@ func appExport(
 // newTestnetApp starts by running the normal newApp method. From there, the app interface returned is modified in order
 // for a testnet to be created from the provided app.
 func newTestnetApp(logger log.Logger, db dbm.DB, traceStore io.Writer, appOpts servertypes.AppOptions) servertypes.Application {
-	// Create an app and type cast to an OsmosisApp
+	// Create an app and type cast to an App
 	newApp := newApp(logger, db, traceStore, appOpts)
 	testApp, ok := newApp.(*app.App)
 	if !ok {
-		panic("app created from newApp is not of type osmosisApp")
+		panic("app created from newApp is not of type App")
 	}
 
 	newValAddr, ok := appOpts.Get(server.KeyNewValAddr).(bytes.HexBytes)
@@ -287,5 +287,5 @@ func newTestnetApp(logger log.Logger, db dbm.DB, traceStore io.Writer, appOpts s
 		panic("upgradeToTrigger is not of type string")
 	}
 
-	return app.InitOsmosisAppForTestnet(testApp, newValAddr, newValPubKey, newOperatorAddress, upgradeToTrigger)
+	return app.InitAppForTestnet(testApp, newValAddr, newValPubKey, newOperatorAddress, upgradeToTrigger)
 }
