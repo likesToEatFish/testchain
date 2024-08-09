@@ -7,7 +7,6 @@ import (
 
 	"github.com/cometbft/cometbft/crypto"
 	"github.com/cometbft/cometbft/libs/bytes"
-	// tmtypes "github.com/cometbft/cometbft/types"
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 
 	"cosmossdk.io/log"
@@ -38,7 +37,6 @@ import (
 	"testchain/app"
 )
 
-// Hay xem ne heheheheehhee
 func initRootCmd(
 	rootCmd *cobra.Command,
 	txConfig client.TxConfig,
