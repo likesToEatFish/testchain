@@ -143,7 +143,21 @@ sleep 7
 # testchaind tx bank send $(testchaind keys show validator1 -a --keyring-backend=test --home=$HOME/.testchaind/validator1) $(testchaind keys show validator2 -a --keyring-backend=test --home=$HOME/.testchaind/validator2) 100000stake --keyring-backend=test --chain-id=testing-1 -y --home=$HOME/.testchaind/validator1 --fees 10stake
 
 # sleep 7
-testchaind tx bank send cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x 10000000000000000000000stake --keyring-backend=test --chain-id=testing-1 -y --home=$HOME/.testchaind/validator1 --fees 200000stake
+# testchaind tx bank send cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x 10000000000000000000000stake --keyring-backend=test --chain-id=testing-1 -y --home=$HOME/.testchaind/validator1 --fees 200000stake
 # sleep 7
 # testchaind tx bank send gaia1f7twgcq4ypzg7y24wuywy06xmdet8pc4hhtf9t gaia16gjg8p5fedy48wf403jwmz2cxlwqtkqlwe0lug 10000000000000000000000stake --keyring-backend=test --chain-id=testing-1 -y --home=$HOME/.testchaind/validator1 --fees 10stake
 
+testchaind q staking validators
+testchaind keys list --keyring-backend=test --home=$HOME/.testchaind/validator1
+testchaind keys list --keyring-backend=test --home=$HOME/.testchaind/validator2
+testchaind keys list --keyring-backend=test --home=$HOME/.testchaind/validator3
+
+
+# testchaind in-place-testnet testing-1 cosmosvaloper1w7f3xx7e75p4l7qdym5msqem9rd4dyc4mq79dm --home $HOME/.testchaind/validator1
+sleep 30
+killall testchaind || true
+# # cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd
+# testchaind in-place-testnet testing-1 cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd --home $HOME/.testchaind/validator1  --accounts-to-fund="cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq,cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"
+# echo "y" | testchaind testnet testing-1 cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd --home $HOME/.testchaind/validator1  --accounts-to-fund="cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq,cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"
+
+# testchaind testnet in-place-testnet testing-1 cosmosvaloper1w7f3xx7e75p4l7qdym5msqem9rd4dyc4mq79dm --home $HOME/.testchaind/validator1 --validator-pukey=xzaD8WNQopfBWPuA4U/WMA+rNLRQATJS3KWspcyigTo= --validator-privkey=6dq+/KHNvyiw2TToCgOpUpQKIzrLs69Rb8Az39xvmxPHNoPxY1Cil8FY+4DhT9YwD6s0tFABMlLcpaylzKKBOg== --accounts-to-fund="cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq,cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"

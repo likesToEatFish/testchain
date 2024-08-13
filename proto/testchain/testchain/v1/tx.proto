@@ -1,11 +1,11 @@
 syntax = "proto3";
-package testchain.testchain;
+package testchain.testchain.v1;
 
 import "amino/amino.proto";
 import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
-import "testchain/testchain/params.proto";
+import "testchain/testchain/v1/params.proto";
 
 option go_package = "testchain/x/testchain/types";
 

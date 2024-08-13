@@ -6,15 +6,18 @@ import (
 	"github.com/stretchr/testify/require"
 
 	keepertest "testchain/testutil/keeper"
+	"testchain/x/testchain/keeper"
 	"testchain/x/testchain/types"
 )
 
 func TestParamsQuery(t *testing.T) {
-	keeper, ctx := keepertest.TestchainKeeper(t)
-	params := types.DefaultParams()
-	require.NoError(t, keeper.SetParams(ctx, params))
+	k, ctx, _ := keepertest.TestchainKeeper(t)
 
-	response, err := keeper.Params(ctx, &types.QueryParamsRequest{})
+	qs := keeper.NewQueryServerImpl(k)
+	params := types.DefaultParams()
+	require.NoError(t, k.Params.Set(ctx, params))
+
+	response, err := qs.Params(ctx, &types.QueryParamsRequest{})
 	require.NoError(t, err)
 	require.Equal(t, &types.QueryParamsResponse{Params: params}, response)
 }

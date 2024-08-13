@@ -1,11 +1,11 @@
 syntax = "proto3";
-package testchain.testchain;
+package testchain.testchain.v1;
 
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "testchain/testchain/params.proto";
+import "testchain/testchain/v1/params.proto";
 
 option go_package = "testchain/x/testchain/types";
 
@@ -13,7 +13,7 @@ option go_package = "testchain/x/testchain/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/testchain/testchain/params";
+    option (google.api.http).get = "/testchain/testchain/v1/params";
   }
 }
 

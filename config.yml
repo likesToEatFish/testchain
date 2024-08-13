@@ -2,10 +2,14 @@ version: 1
 validation: sovereign
 accounts: 
 - name: alice
+  mnemonic: "ozone unfold device pave lemon potato omit insect column wise cover hint narrow large provide kidney episode clay notable milk mention dizzy muffin crazy"
+  address: "cosmos1wa3u4knw74r598quvzydvca42qsmk6jrzmgy07"
   coins:
   - 20000token
   - 200000000stake
 - name: bob
+  mnemonic: "cactus cable glow spray network group butter recycle weather virtual style bronze treat office energy exit ginger salute slot despair maple bus wheel stool"
+  address: "cosmos10uls38gddhhlywla0sjlvqg8pjvcffx4lu25c4"
   coins:
   - 10000token
   - 100000000stake
@@ -19,4 +23,9 @@ faucet:
   - 100000stake
 validators:
 - name: alice
+  operatoraddress: cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd
   bonded: 100000000stake
+  home: "$HOME/.testchaind/validator1"
+
+genesis:
+  chain_id: "testing-1"

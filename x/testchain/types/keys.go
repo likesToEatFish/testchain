@@ -1,5 +1,7 @@
 package types
 
+import "cosmossdk.io/collections"
+
 const (
 	// ModuleName defines the module name
 	ModuleName = "testchain"
@@ -12,7 +14,7 @@ const (
 )
 
 var (
-	ParamsKey = []byte("p_testchain")
+	ParamsKey = collections.NewPrefix("p_testchain")
 )
 
 func KeyPrefix(p string) []byte {

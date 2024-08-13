@@ -3,7 +3,7 @@ package testchain
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "testchain/api/testchain/testchain"
+	modulev1 "testchain/api/testchain/testchain/v1"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

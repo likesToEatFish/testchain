@@ -3,6 +3,8 @@ package app
 import (
 	"time"
 
+	testchainmodulev1 "testchain/api/testchain/testchain/module/v1"
+
 	runtimev1alpha1 "cosmossdk.io/api/cosmos/app/runtime/v1alpha1"
 	appv1alpha1 "cosmossdk.io/api/cosmos/app/v1alpha1"
 	authmodulev1 "cosmossdk.io/api/cosmos/auth/module/v1"
@@ -53,19 +55,17 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	testchainmodulev1 "testchain/api/testchain/testchain/module"
-	_ "testchain/x/testchain/module" // import for side-effects
-	testchainmoduletypes "testchain/x/testchain/types"
-	// this line is used by starport scaffolding # stargate/app/moduleImport
-)
-
-var (
 	// NOTE: The genutils module must occur after staking so that pools are
 	// properly initialized with tokens from genesis accounts.
 	// NOTE: The genutils module must also occur after auth so that it can access the params from auth.
 	// NOTE: Capability module must occur first so that it can initialize any capabilities
 	// so that other modules that want to create or claim capabilities afterwards in InitChain
 	// can do so safely.
+	_ "testchain/x/testchain/module"
+	testchainmoduletypes "testchain/x/testchain/types"
+)
+
+var (
 	genesisModuleOrder = []string{
 		// cosmos-sdk/ibc modules
 		capabilitytypes.ModuleName,

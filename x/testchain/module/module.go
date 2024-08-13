@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"cosmossdk.io/core/address"
 	"cosmossdk.io/core/appmodule"
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/depinject"
@@ -20,7 +21,7 @@ import (
 
 	// this line is used by starport scaffolding # 1
 
-	modulev1 "testchain/api/testchain/testchain/module"
+	modulev1 "testchain/api/testchain/testchain/module/v1"
 	"testchain/x/testchain/keeper"
 	"testchain/x/testchain/types"
 )
@@ -117,7 +118,7 @@ func NewAppModule(
 // RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries
 func (am AppModule) RegisterServices(cfg module.Configurator) {
 	types.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
-	types.RegisterQueryServer(cfg.QueryServer(), am.keeper)
+	types.RegisterQueryServer(cfg.QueryServer(), keeper.NewQueryServerImpl(am.keeper))
 }
 
 // RegisterInvariants registers the invariants of the module. If an invariant deviates from its predicted value, the InvariantRegistry triggers appropriate logic (most often the chain will be halted)
@@ -175,6 +176,7 @@ func init() {
 type ModuleInputs struct {
 	depinject.In
 
+	AddressCodec address.Codec
 	StoreService store.KVStoreService
 	Cdc          codec.Codec
 	Config       *modulev1.Module
@@ -199,6 +201,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 	}
 	k := keeper.NewKeeper(
 		in.Cdc,
+		in.AddressCodec,
 		in.StoreService,
 		in.Logger,
 		authority.String(),
