@@ -18,10 +18,10 @@ testchaind init --chain-id=testing-1 validator2 --home=$HOME/.testchaind/validat
 testchaind init --chain-id=testing-1 validator3 --home=$HOME/.testchaind/validator3
 
 # create keys for all three validators
-# cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq
-echo $(cat /Users/donglieu/script/keys/mnemonic1)| testchaind keys add validator1 --recover --keyring-backend=test --home=$HOME/.testchaind/validator1
+# cosmos1wa3u4knw74r598quvzydvca42qsmk6jrzmgy07
+echo "ozone unfold device pave lemon potato omit insect column wise cover hint narrow large provide kidney episode clay notable milk mention dizzy muffin crazy" | testchaind keys add validator1 --recover --keyring-backend=test --home=$HOME/.testchaind/validator1
 # cosmos1w7f3xx7e75p4l7qdym5msqem9rd4dyc4752spg
-echo $(cat /Users/donglieu/script/keys/mnemonic2)| testchaind keys add validator2 --recover --keyring-backend=test --home=$HOME/.testchaind/validator2
+echo "cactus cable glow spray network group butter recycle weather virtual style bronze treat office energy exit ginger salute slot despair maple bus wheel stool" | testchaind keys add validator2 --recover --keyring-backend=test --home=$HOME/.testchaind/validator2
 # cosmos1g9v3zjt6rfkwm4s8sw9wu4jgz9me8pn27f8nyc
 echo $(cat /Users/donglieu/script/keys/mnemonic3)| testchaind keys add validator3 --recover --keyring-backend=test --home=$HOME/.testchaind/validator3
 
@@ -102,19 +102,6 @@ sed -i -E 's|prometheus = false|prometheus = true|g' $VALIDATOR3_CONFIG
 sed -i -E 's|prometheus_listen_addr = ":26660"|prometheus_listen_addr = ":26620"|g' $VALIDATOR3_CONFIG
 
 # # update
-# update_test_genesis () {
-#     # EX: update_test_genesis '.consensus_params["block"]["max_gas"]="100000000"'
-#     cat $HOME/.testchaind/validator1/config/genesis.json | jq "$1" > tmp.json && mv tmp.json $HOME/.testchaind/validator1/config/genesis.json
-#     cat $HOME/.testchaind/validator2/config/genesis.json | jq "$1" > tmp.json && mv tmp.json $HOME/.testchaind/validator2/config/genesis.json
-#     cat $HOME/.testchaind/validator3/config/genesis.json | jq "$1" > tmp.json && mv tmp.json $HOME/.testchaind/validator3/config/genesis.json
-# }
-
-# update_test_genesis '.app_state["gov"]["voting_params"]["voting_period"] = "30s"'
-# update_test_genesis '.app_state["mint"]["params"]["mint_denom"]= "stake"'
-# update_test_genesis '.app_state["gov"]["deposit_params"]["min_deposit"]=[{"denom": "stake","amount": "1000000"}]'
-# update_test_genesis '.app_state["crisis"]["constant_fee"]={"denom": "stake","amount": "1000"}'
-# update_test_genesis '.app_state["staking"]["params"]["bond_denom"]="stake"'
-
 
 # copy validator1 genesis file to validator2-3
 cp $HOME/.testchaind/validator1/config/genesis.json $HOME/.testchaind/validator2/config/genesis.json
@@ -136,16 +123,7 @@ screen -S gaia2 -t gaia2 -d -m testchaind start --home=$HOME/.testchaind/validat
 screen -S gaia3 -t gaia3 -d -m testchaind start --home=$HOME/.testchaind/validator3
 # testchaind start --home=$HOME/.testchaind/validator3
 
-# screen -r gaia1
-
 sleep 7
-
-# testchaind tx bank send $(testchaind keys show validator1 -a --keyring-backend=test --home=$HOME/.testchaind/validator1) $(testchaind keys show validator2 -a --keyring-backend=test --home=$HOME/.testchaind/validator2) 100000stake --keyring-backend=test --chain-id=testing-1 -y --home=$HOME/.testchaind/validator1 --fees 10stake
-
-# sleep 7
-# testchaind tx bank send cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x 10000000000000000000000stake --keyring-backend=test --chain-id=testing-1 -y --home=$HOME/.testchaind/validator1 --fees 200000stake
-# sleep 7
-# testchaind tx bank send gaia1f7twgcq4ypzg7y24wuywy06xmdet8pc4hhtf9t gaia16gjg8p5fedy48wf403jwmz2cxlwqtkqlwe0lug 10000000000000000000000stake --keyring-backend=test --chain-id=testing-1 -y --home=$HOME/.testchaind/validator1 --fees 10stake
 
 testchaind q staking validators
 testchaind keys list --keyring-backend=test --home=$HOME/.testchaind/validator1
@@ -156,8 +134,5 @@ testchaind keys list --keyring-backend=test --home=$HOME/.testchaind/validator3
 # testchaind in-place-testnet testing-1 cosmosvaloper1w7f3xx7e75p4l7qdym5msqem9rd4dyc4mq79dm --home $HOME/.testchaind/validator1
 sleep 30
 killall testchaind || true
-# # cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd
-# testchaind in-place-testnet testing-1 cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd --home $HOME/.testchaind/validator1  --accounts-to-fund="cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq,cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"
-# echo "y" | testchaind testnet testing-1 cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd --home $HOME/.testchaind/validator1  --accounts-to-fund="cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq,cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"
-
-# testchaind testnet in-place-testnet testing-1 cosmosvaloper1w7f3xx7e75p4l7qdym5msqem9rd4dyc4mq79dm --home $HOME/.testchaind/validator1 --validator-pukey=xzaD8WNQopfBWPuA4U/WMA+rNLRQATJS3KWspcyigTo= --validator-privkey=6dq+/KHNvyiw2TToCgOpUpQKIzrLs69Rb8Az39xvmxPHNoPxY1Cil8FY+4DhT9YwD6s0tFABMlLcpaylzKKBOg== --accounts-to-fund="cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq,cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x"
+# newOperatorAddress: cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd
+testchaind in-place-testnet testing-1 cosmosvaloper1wa3u4knw74r598quvzydvca42qsmk6jr80u3rd --home $HOME/.testchaind/validator1  --accounts-to-fund="cosmos1f7twgcq4ypzg7y24wuywy06xmdet8pc4473tnq,cosmos1qvuhm5m644660nd8377d6l7yz9e9hhm9evmx3x" --skip-confirmation
